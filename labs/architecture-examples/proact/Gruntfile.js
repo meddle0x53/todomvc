@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
   'use strict'
 
-  grunt.loadNpmTasks('grunt-browser-sync');
+  require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
     browserSync: {
@@ -14,7 +14,18 @@ module.exports = function(grunt) {
           },
           injectChanges: false
       }
+    },
+
+    karma: {
+      unit: {
+        configFile: 'spec/config/karma.conf.js',
+        keepalive: true
+      }
     }
   });
+
+  grunt.registerTask('spec', ['karma:unit']);
+
+  grunt.registerTask('default', ['browserSync']);
 };
 
